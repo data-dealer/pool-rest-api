@@ -10,10 +10,6 @@ To focus on clean [architecture and code] + full deliverable, I chose the stack 
 - Docker + Django REST framework + Nginx + Postgres
 
 
----------
-# Document
-http://localhost/doc/
-
 
 # Start guide
 
@@ -31,6 +27,8 @@ docker-compose exec restapi python manage.py makemigrations app
 docker-compose exec restapi python manage.py migrate app
 ```
 
+
+
 ## 3. Run test
 restapi/test/test_api.py
 
@@ -42,6 +40,9 @@ the result:
 Ran 3 tests in 0.022s
 OK
 ```
+
+## 4. Document
+http://localhost/doc/
 
 
 
