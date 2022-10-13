@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    env_file:
+      - ./config/db/postgres.env
+    networks:
+      - default_net
+    volumes:
+      - data_db:/data/db
+    ports:
+      - 5432:5432
+      
+  restapi:
+    container_name: restapi
+    build:
+      context: ./restapi
+      dockerfile: Dockerfile 
+    volumes:
+      - ./restapi:/opt/restapi/src
+      - ./config/gunicorn/:/opt/restapi/config/gunicorn
+      - static:/opt/restapi/static
+    networks:
+      - default_net
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:1.19.10-alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - static:/opt/restapi/static
+    networks:
+      - default_net
+    depends_on:
+      - restapi
+
+networks:
+  default_net:
+    driver: bridge
+
+volumes:
+  data_db:
+  static: 

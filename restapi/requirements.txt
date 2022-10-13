@@ -1,0 +1,11 @@
+Django==3.0.5
+dnspython==2.0.0
+Gunicorn==20.0.4
+whitenoise==2.0.6
+django-cors-headers==3.5.0
+djangorestframework==3.11.1
+psycopg2-binary>=2.8
+sqlparse==0.2.4
+numpy
+pygments
+coreapi
